@@ -7,6 +7,7 @@ const guestMiddleware = require('./middlewares/guest');
 
 const authController = require('./controllers/authController');
 const dashboardController = require('./controllers/dashboardController');
+const categoryController = require('./controllers/categoryController');
 
 // middleware to add flash messages to every view by using the locals property
 routes.use((req, res, next) => {
@@ -15,6 +16,9 @@ routes.use((req, res, next) => {
   next();
 });
 
+/**
+ * Auth
+ */
 routes.get('/', guestMiddleware, authController.signin);
 routes.get('/signup', guestMiddleware, authController.signup);
 routes.get('/signout', authController.signout);
@@ -22,11 +26,20 @@ routes.get('/signout', authController.signout);
 routes.post('/register', authController.register);
 routes.post('/authenticate', authController.authenticate);
 
+/**
+ * Dashboard
+ */
 // setting for every /app route the middleware
 // otherwise, we could set route by route
 // Ex: routes.get('/app/dashboard', authMiddleware, dashboardController.index);
 routes.use('/app', authMiddleware);
 routes.get('/app/dashboard', dashboardController.index);
+
+
+/**
+ * Categories
+ */
+routes.post('/app/categories/create', categoryController.store);
 
 // If the route does not exists, then render the 404 page
 routes.use((req, res) => res.render('errors/404'));
