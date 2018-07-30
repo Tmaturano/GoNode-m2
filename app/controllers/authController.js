@@ -46,7 +46,6 @@ module.exports = {
       }
 
       req.session.user = user;
-
       // when the save function finishes, the callback method will be executed
       // This is because the save function is not async
       return req.session.save(() => {

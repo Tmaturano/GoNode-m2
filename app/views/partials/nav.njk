@@ -1,5 +1,6 @@
 <nav id="main">
   <div class="header">
+    <span>{{ user.name }}</span>
     <strong>Minha Biblioteca</strong>
     <a href="/signout">Sair</a>
   </div>
@@ -27,7 +28,7 @@
   <form class="modal-content" method="POST" action="/app/categories/create">
     <input type="text" name="title" placeholder="Título da Categoria">
 
-    <button type="submit">SALVAR CATEGORIA</button>
+    <button type="submit">SALVAR</button>
     <a href="#" data-modal-close="#new-category">CANCELAR</a>
   </form>
 </div>
