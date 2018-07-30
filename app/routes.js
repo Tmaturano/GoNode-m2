@@ -49,6 +49,7 @@ routes.get('/app/categories/:id', categoryController.show);
  */
 routes.get('/app/categories/:categoryId/snippets/:id', snippetController.show);
 routes.post('/app/categories/:categoryId/snippets/create', snippetController.store);
+routes.put('/app/categories/:categoryId/snippets/:id', snippetController.update);
 
 
 // If the route does not exists, then render the 404 page
