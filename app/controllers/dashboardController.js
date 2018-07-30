@@ -9,6 +9,7 @@ module.exports = {
           UserId: req.session.user.id,
         },
       });
+
       return res.render('dashboard/index', { categories });
     } catch (err) {
       return next(err);

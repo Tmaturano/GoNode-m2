@@ -40,6 +40,7 @@ routes.get('/app/dashboard', dashboardController.index);
  * Categories
  */
 routes.post('/app/categories/create', categoryController.store);
+routes.get('/app/categories/:id', categoryController.show);
 
 // If the route does not exists, then render the 404 page
 routes.use((req, res) => res.render('errors/404'));

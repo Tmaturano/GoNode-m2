@@ -1,4 +1,4 @@
-const { Category } = require('../models');
+const { Category, Snippet } = require('../models');
 
 module.exports = {
   async store(req, res, next) {
@@ -10,6 +10,29 @@ module.exports = {
 
       req.flash('success', 'Categoria criada com sucesso');
       return res.redirect(`/app/categories/${category.id}`);
+    } catch (err) {
+      return next(err);
+    }
+  },
+
+  async show(req, res, next) {
+    try {
+      const categories = await Category.findAll({
+        include: [Snippet], // Eager Loading. If category has snippet, bring it
+        where: {
+          UserId: req.session.user.id,
+        },
+      });
+
+      const snippets = await Snippet.findAll({
+        where: { CategoryId: req.params.id },
+      });
+
+      return res.render('categories/show', {
+        categories,
+        snippets,
+        activeCategory: req.params.id,
+      });
     } catch (err) {
       return next(err);
     }
