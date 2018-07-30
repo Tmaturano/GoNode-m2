@@ -8,6 +8,7 @@ const guestMiddleware = require('./middlewares/guest');
 const authController = require('./controllers/authController');
 const dashboardController = require('./controllers/dashboardController');
 const categoryController = require('./controllers/categoryController');
+const snippetController = require('./controllers/snippetController');
 
 // middleware to add flash messages to every view by using the locals property
 routes.use((req, res, next) => {
@@ -41,6 +42,13 @@ routes.get('/app/dashboard', dashboardController.index);
  */
 routes.post('/app/categories/create', categoryController.store);
 routes.get('/app/categories/:id', categoryController.show);
+
+
+/**
+ * Snippets
+ */
+routes.post('/app/categories/:categoryId/snippets/create', snippetController.store);
+
 
 // If the route does not exists, then render the 404 page
 routes.use((req, res) => res.render('errors/404'));
